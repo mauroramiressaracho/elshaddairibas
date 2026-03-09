@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visão Celular | El Shaddai Ribas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Cinzel:wght@600;700;800&family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-base: #050505;
+            --bg-secondary: #111111;
+            --gold-1: rgba(201, 162, 39, 0.18);
+            --gold-2: rgba(201, 162, 39, 0.10);
+            --blue-soft: rgba(60, 90, 180, 0.08);
+            --gold-solid: #d4af37;
+        }
+        html, body {
+            min-height: 100%;
+        }
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-base);
+        }
+        body {
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, var(--gold-1), transparent 35%),
+                radial-gradient(circle at 80% 30%, var(--blue-soft), transparent 30%),
+                radial-gradient(circle at 50% 80%, var(--gold-2), transparent 35%),
+                linear-gradient(135deg, var(--bg-base), var(--bg-secondary) 45%, #090909 100%);
+            background-color: var(--bg-base);
+            color: #ffffff;
+            overflow-x: hidden;
+            isolation: isolate;
+        }
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: -20%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+            will-change: transform, opacity;
+        }
+        body::before {
+            background:
+                radial-gradient(circle at 30% 30%, rgba(201,162,39,0.16), transparent 30%),
+                radial-gradient(circle at 70% 60%, rgba(201,162,39,0.10), transparent 28%);
+            animation: fundoGlowUm 18s ease-in-out infinite alternate;
+            opacity: .9;
+        }
+        body::after {
+            background:
+                radial-gradient(circle at 70% 20%, rgba(60,90,180,0.10), transparent 26%),
+                radial-gradient(circle at 40% 75%, rgba(201,162,39,0.08), transparent 24%);
+            animation: fundoGlowDois 24s ease-in-out infinite alternate;
+            opacity: .75;
+        }
+        main, header, nav, section, footer {
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes fundoGlowUm {
+            0% {
+                transform: translate3d(-2%, -1%, 0) scale(1);
+                opacity: .75;
+            }
+            50% {
+                transform: translate3d(2%, 1%, 0) scale(1.08);
+                opacity: .95;
+            }
+            100% {
+                transform: translate3d(0%, 3%, 0) scale(1.03);
+                opacity: .8;
+            }
+        }
+        @keyframes fundoGlowDois {
+            0% {
+                transform: translate3d(1%, -2%, 0) scale(1.02);
+                opacity: .55;
+            }
+            50% {
+                transform: translate3d(-2%, 2%, 0) scale(1.1);
+                opacity: .8;
+            }
+            100% {
+                transform: translate3d(3%, 0%, 0) scale(1.04);
+                opacity: .6;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            body::before,
+            body::after {
+                animation: none;
+            }
+        }
+        .site-nav {
+            background: rgba(8, 14, 28, 0.55);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .site-nav.scrolled {
+            background: rgba(8, 14, 28, 0.8);
+            border-bottom-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 18px 30px -20px rgba(0, 0, 0, 0.9);
+        }
+        .btn-nav-donate {
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            border-radius: 999px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            transition: all 0.25s ease;
+        }
+        .btn-nav-donate:hover {
+            background: #d4af37;
+            color: #000;
+        }
+        .btn-gold {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .btn-gold:hover {
+            background: #d4af37;
+            color: black;
+        }
+        .brand-logo {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            color: var(--gold-solid);
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+        .brand-logo-main {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            font-size: 1.25rem;
+        }
+        .brand-logo-main .el-line {
+            display: block;
+            font-size: 0.9rem;
+            letter-spacing: 0.18em;
+            margin-bottom: 0.1rem;
+        }
+        .brand-logo-divider {
+            width: 100%;
+            border-top: 1px solid rgba(212, 175, 55, 0.6);
+            margin: 0.22rem 0 0.3rem;
+        }
+        .brand-logo-sub {
+            font-family: 'Great Vibes', cursive;
+            text-transform: none;
+            color: #f8f8f8;
+            font-size: 1rem;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .gold-text {
+            color: var(--gold-solid);
+        }
+        .content-card {
+            background: rgba(10, 12, 16, 0.58);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .verse {
+            border-left: 3px solid rgba(212, 175, 55, 0.8);
+            background: rgba(255, 255, 255, 0.03);
+        }
+    </style>
+</head>
+<body class="antialiased text-white">
+    <nav id="site-nav" class="site-nav fixed top-0 left-0 w-full z-50 py-4 px-4 sm:px-6 lg:px-10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <a href="index.html#home" class="brand-logo" aria-label="El Shaddai Comunidade Cristã">
+                <span class="brand-logo-main">
+                    <span class="el-line">EL</span>
+                    <span>SHADDAI</span>
+                </span>
+                <span class="brand-logo-divider"></span>
+                <span class="brand-logo-sub">Comunidade Cristã</span>
+            </a>
+            <div class="hidden lg:flex items-center gap-4 xl:gap-6 text-xs xl:text-sm font-semibold uppercase tracking-wider">
+                <a href="index.html#home" class="hover:text-[#d4af37] transition">Início</a>
+                <a href="index.html#sobre" class="hover:text-[#d4af37] transition">Sobre</a>
+                <a href="index.html#horarios" class="hover:text-[#d4af37] transition">Horários</a>
+                <a href="visao-celular.html" class="hover:text-[#d4af37] transition">Visão Celular</a>
+                <a href="index.html#lideranca" class="hover:text-[#d4af37] transition">Liderança</a>
+                <a href="index.html#eventos" class="hover:text-[#d4af37] transition">Eventos</a>
+                <a href="index.html#instagram" class="hover:text-[#d4af37] transition">Instagram</a>
+                <a href="index.html#local" class="hover:text-[#d4af37] transition">Local</a>
+                <button type="button" class="open-donation-modal btn-nav-donate">Doação</button>
+            </div>
+            <button id="mobile-menu-toggle" class="lg:hidden text-white text-2xl p-2" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+                <i id="mobile-menu-icon" class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden max-w-7xl mx-auto mt-3">
+            <div class="rounded-xl border border-[#d4af3740] bg-[#0b1320]/90 px-4 py-5 flex flex-col gap-4 text-sm font-semibold uppercase tracking-wider">
+                <a href="index.html#home" class="mobile-nav-link hover:text-[#d4af37] transition">Início</a>
+                <a href="index.html#sobre" class="mobile-nav-link hover:text-[#d4af37] transition">Sobre</a>
+                <a href="index.html#horarios" class="mobile-nav-link hover:text-[#d4af37] transition">Horários</a>
+                <a href="visao-celular.html" class="mobile-nav-link hover:text-[#d4af37] transition">Visão Celular</a>
+                <a href="index.html#lideranca" class="mobile-nav-link hover:text-[#d4af37] transition">Liderança</a>
+                <a href="index.html#eventos" class="mobile-nav-link hover:text-[#d4af37] transition">Eventos</a>
+                <a href="index.html#instagram" class="mobile-nav-link hover:text-[#d4af37] transition">Instagram</a>
+                <a href="index.html#local" class="mobile-nav-link hover:text-[#d4af37] transition">Local</a>
+                <button type="button" class="open-donation-modal text-left rounded-lg border border-[#d4af37] px-3 py-2 text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition">Doação</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+        <section class="max-w-6xl mx-auto content-card rounded-2xl p-6 sm:p-10 lg:p-14">
+            <header class="mb-10">
+                <p class="gold-text text-sm tracking-[0.25em] font-semibold uppercase">Ensino</p>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mt-2">VISÃO CELULAR NO MODELO DOS 12</h1>
+            </header>
+
+            <div class="space-y-6 text-gray-200 leading-relaxed text-base sm:text-lg">
+                <p>Veja abaixo um resumo do que a Visão Celular proporciona às vidas e às igrejas de cobertura e tenha suas dúvidas sanadas com relação a qualquer tipo de crítica que tenha ouvido sobre este modelo que Jesus nos deu para estabelecer o “ide e fazei discípulos.”</p>
+
+                <h2 class="text-3xl md:text-4xl font-bold gold-text pt-2">Uma Estratégia de Deus para Que Seu Maior Sonho se Cumpra: Visão Celular</h2>
+
+                <blockquote class="verse rounded-xl p-5 text-gray-100 italic">
+                    “... Subiu Pedro ao terraço para orar, quase à hora sexta. E tendo fome, quis comer; e, enquanto lho preparavam, sobreveio-lhe um arrebatamento de sentidos. E viu o céu aberto, e que descia um vaso, como se fosse um grande lençol atado pelas quatro pontas, e vindo para a terra no qual havia de todos os animais quadrúpedes e répteis da terra, e aves do céu. E foi-lhe dirigida uma voz: Levanta-te, Pedro, mata e come. Mas Pedro disse: De modo nenhum, Senhor, porque nunca comi coisa alguma comum e imunda. E segunda vez lhe disse a voz: Não faças tu comum ao que Deus purificou. E aconteceu isto por três vezes; e o vaso tornou a recolher-se ao céu.” (Atos 10:9-16)
+                </blockquote>
+
+                <p>Quando recebemos a Visão da parte de Deus podemos ser preconceituosos ou recebê-la no espírito, como é a vontade do Senhor que a recebamos. Porém, a escolha é sempre nossa. E a partir de nossa escolha teremos ou não êxito. Aonde nossos pés têm alcançado, temos ensinado que a Visão Celular é como água. É fácil beber água, mas alguns se engasgam. A Visão é simples se você não sair dos princípios, mas torna-se complicada se você quiser apenas os métodos. Quando nos interessamos apenas pelo método, pegamos adaptações. Quando pegamos a unção, recebemos a adoção. A Visão não é adaptada, ela é adotada. Todos que pegaram apenas o método, adaptaram; todos que pegaram a unção, adotaram.</p>
+
+                <p>A Visão é gerada. Quando você gera a Visão, há um resultado estupefato em sua vida e ministério. Se a Visão for gerada, você se responsabiliza. Se a Visão for arranjada, você desiste. Não abrimos mão daquilo que foi gerado. Por isso você não deve somente entrar na Visão, mas a Visão tem que entrar em você. Há uma diferença fundamental nisso. Aqueles que entram na Visão, entram no método. Aqueles nos quais a Visão entra, entram na unção. Se a Visão Celular entrar em você, você não terá dificuldade de cumprir todo o processo, porque estará na unção. O método será apenas o encaminhamento, porém o fundamental você já terá: a unção.</p>
+
+                <h2 class="text-3xl md:text-4xl font-bold gold-text pt-4">Preservando a visão pela qualidade</h2>
+
+                <h3 class="text-2xl md:text-3xl font-semibold pt-2">1. Pré-Encontro</h3>
+                <p>Todo Pré-Encontro deve ser feito com qualidade. O ministrador deve ser alguém preparado. Para o Encontro ser tremendo, o discípulo precisa passar por um bom Pré-Encontro, um Pré-Encontro de qualidade.</p>
+                <p>Se fizermos um Pré-Encontro bem feito, teremos um Encontro excelente. O Pré-Encontro tem que impactar a vida das pessoas. As pessoas devem sair do Pré-Encontro com os corações abertos para receberem as ministrações do Encontro. Uma pessoa jamais deve ir ao Encontro se não tiver feito o Pré-Encontro. Muito menos se deve fazer Encontros para levar pessoas que não são crentes com o objetivo de que lá se convertam. O objetivo do Encontro não é ser evangelístico.</p>
+
+                <h3 class="text-2xl md:text-3xl font-semibold pt-2">2. Encontro</h3>
+                <p>Muitas aberrações, infelizmente, aconteceram Brasil afora nos Encontros; não nos responsabilizamos por nenhuma delas, pois isso não é ensinado pela Visão Celular. O Encontro é para trazer conforto, edificação, é para as pessoas voltarem felizes, curadas e cheias do Espírito Santo, e não abrindo precedentes ao diabo.</p>
+                <p>O Encontro deve ser realizado em três dias, portanto não é correto reduzir as ministrações ou a programação do Encontro para um dia. É impossível manter a qualidade assim e ministrar tudo o que é necessário. O diabo é oportunista e vai querer trabalhar para trazer desânimo na Visão.</p>
+                <p>Por que o Encontro é de três dias? Porque, na Bíblia, três dias fala de ressurreição. E o Encontro é uma proposta de ressurreição. “No segundo dia levantará e no terceiro ressurgirá.” (Amós 6:3).</p>
+                <p>Quantos dias Abraão levou para chegar ao Moriá? Três dias. Quantos dias Elias passou dentro de uma caverna até que Deus falasse com ele? Três. Quantos dias os Profetas experimentaram da presença do Senhor no templo? Quantos dias Paulo passou com as escamas nos olhos até que elas caíssem? Três.</p>
+                <p>Três dias fala de ressurreição, de libertação, de manifestação da glória de Deus, de mudança radical. Então os três dias têm um significado espiritual. Não são escolhidos três dias por acaso. No Encontro, as pessoas devem desligar-se dos seus afazeres seculares, dos seus compromissos. Assim, também, não aconselhamos realizar um Encontro no qual as pessoas vão para o local do Encontro pela manhã e voltam para dormir em suas próprias casas. Deus proporciona muito tratamento às pessoas no Encontro quando passam os três dias juntos.</p>
+                <p>Pessoas que muitas vezes dão trabalho para se submeterem às regras, e para conviverem com os irmãos, são tremendamente trabalhadas por Deus. Infelizmente, na nossa experiência, as pessoas que mais dão trabalho são os líderes que muitas vezes sabem dar ordens, mas não sabem se submeter.</p>
+
+                <h3 class="text-2xl md:text-3xl font-semibold pt-2">3. Pós-Encontro</h3>
+                <p>O Encontro abre as portas da nossa alma, é como se fosse uma luz do dia sobre nós. Durante o dia, deixamos as janelas da nossa casa abertas, mas à noite, não. O Pós-Encontro é momento em que devemos fechar as portas.</p>
+                <p>No Encontro, afrontamos o diabo, ou seja, quebramos os argumentos que tínhamos com o inimigo. Mas, enquanto o encontrista volta com júbilo, o diabo está procurando uma oportunidade para tragá-lo. Então, é no Pós-Encontro que fecharemos as portas do contra-ataque do diabo.</p>
+                <p>Faraó liberou o povo de Israel, mas depois de três dias os perseguiu. Depois de três dias, nós ressurgimos, mas também o inimigo se ira. O alvo de Faraó era dizimar o povo. Assim também deseja o inimigo de nossas almas, o nosso adversário. Se as portas não forem fechadas, o falso leão poderá tragar as vidas.</p>
+                <p>No Pós-Encontro, devemos fechar as portas em cinco áreas específicas:</p>
+
+                <h4 class="text-xl sm:text-2xl font-semibold gold-text pt-1">3.1 Família</h4>
+                <p>Muitas vezes, os familiares fazem comentários do tipo: “Você recebeu lavagem cerebral? Quer ser melhor que os outros?” O diabo utiliza pessoas que amamos, porque sabe que o peso emocional e espiritual é maior. Assim, devemos estar preparados para não permitir que os contra-ataques vindos da família nos enfraqueçam.</p>
+
+                <h4 class="text-xl sm:text-2xl font-semibold gold-text pt-1">3.2 Amigos do passado</h4>
+                <p>Muitos recebem chacotas e palavras desanimadoras de pessoas que nem sequer tinham mais contato. Amigos que há muito não viam tentarão persuadir a desistência. E isto infelizmente também provém de amigos cristãos.</p>
+
+                <h4 class="text-xl sm:text-2xl font-semibold gold-text pt-1">3.3 Finanças</h4>
+                <p>A Visão Celular visa a restituição financeira. Nós estamos marchando contra o espírito de embriaguez que tira a direção nas finanças e libera os gafanhotos cortador, migrador, destruidor e devorador (Joel 1). Deus nos ordena tocar a trombeta e avançar com o exército.</p>
+                <p>Em toda reunião de célula, devemos ministrar sobre dízimos e ofertas, dando oportunidade para que os discípulos sejam dizimistas e ofertantes fiéis. Assim estaremos selando a fidelidade e a prosperidade. O dízimo sela a nossa fidelidade e a oferta a nossa prosperidade.</p>
+                <p>Deus vai usar as células, as macro-células e as Redes para trazer riqueza e prosperidade ao ministério, a fim de não termos necessidade de coisa alguma. Como líderes, precisamos encerrar todo argumento na Igreja. Faremos isso sendo o modelo.</p>
+                <p>O dízimo é a décima parte de tudo que ganhamos. Quem entrega o dízimo não está fazendo mais do que sua obrigação. Nós não damos o dízimo porque ele não é nosso. Nós devolvemos o dízimo, porque ele é de Deus.</p>
+                <p>Ofertar significa dar o melhor que possuímos, significa renunciar. Vemos, nos exemplos bíblicos, que Abraão renunciou seu filho em oferta, e Davi entregou uma oferta que foi o seu melhor, um sacrifício.</p>
+
+                <blockquote class="verse rounded-xl p-5 text-gray-100 italic">
+                    “Mas o rei disse a Araúna: Não! antes to comprarei pelo seu valor, porque não oferecerei ao Senhor meu Deus holocaustos que não me custem nada. Comprou, pois, Davi a eira e os bois por cinqüenta siclos de prata. E edificou ali um altar ao Senhor, e ofereceu holocaustos e ofertas pacíficas. Assim o Senhor se tornou propício para com a terra, e cessou aquela praga de sobre Israel.” (II Samuel 24:24)
+                </blockquote>
+
+                <p>Através do nosso modelo de vida e prática de fé, ensinaremos o povo a ofertar, com alegria, o seu melhor. Muitas vezes, vemos que as pessoas quando vão ofertar na Igreja pegam a menor nota que têm e entregam-na de qualquer jeito, sem proposta, apenas para cumprir um costume, um ritual. Não deve ser assim. Cada oferta tem uma proposta específica. O dízimo tem o seu valor estipulado, mas a oferta é uma decisão pessoal.</p>
+                <p>Deus está observando as ofertas que entregamos em Seu Altar. Jesus fez isso quando observou que a viúva tinha entregado mais do que os outros. E entregou mais porque deu TUDO o que tinha. Em Hebreus, vemos que os dízimos que são recebidos na Terra, são recebidos nos céus (Hebreus 7:8). Jesus está interessado na qualidade da oferta que entregamos no Altar do Senhor.</p>
+                <p>Os líderes precisam corrigir a linguagem que usam no momento da entrega dos dízimos e ofertas. Deve-se lembrar que os dízimos não são nossos e que as ofertas são uma renúncia.</p>
+                <p>Muitas vezes, as ovelhas não ofertam, porque os líderes não conseguem mostrar-lhes a importância desse ato. Quando o povo oferta e dizima, Deus está proporcionando a oportunidade de serem ricamente abençoados, de fecharem as portas da maldição, da pobreza e da miséria. Quem recebe os dízimos e as ofertas é nosso Sumo Sacerdote, Jesus, e é Ele mesmo quem sela, no Altar, a aliança da prosperidade.</p>
+                <p>Deus quer que ofertemos com alegria.</p>
+
+                <blockquote class="verse rounded-xl p-5 text-gray-100 italic">
+                    “Cada um contribua segundo propôs no seu coração; não com tristeza, nem por constrangimento; porque Deus ama ao que dá com alegria. E Deus é poderoso para fazer abundar em vós toda a graça, a fim de que, tendo sempre, em tudo, toda a suficiência, abundeis em toda boa obra; conforme está escrito: Espalhou, deu aos pobres; a sua justiça permanece para sempre. Ora, aquele que dá a semente ao que semeia, e pão para comer, também dará e multiplicará a vossa sementeira, e aumentará os frutos da vossa justiça, enquanto em tudo enriqueceis para toda a liberalidade, a qual por nós reverte em ações de graças a Deus. Porque a ministração deste serviço não só supre as necessidades dos santos, mas também transborda em muitas ações de graças a Deus.” (II Coríntios 7:9-12)
+                </blockquote>
+
+                <h4 class="text-xl sm:text-2xl font-semibold gold-text pt-1">3.4 Saúde</h4>
+                <p>As portas na nossa saúde serão fechadas quando aprendermos a cuidar do templo do Espírito Santo. O diabo não encontrará argumento em nossa saúde para nos derrubar. No Pós-Encontro, seremos ministrados sobre os cuidados com a saúde, e seremos prevenidos contra os ataques do inimigo nesta área.</p>
+                <p>Precisamos cuidar da saúde, do corpo. E, para isso, é necessário receber orientações médicas, principalmente com relação à alimentação. Quantas pessoas comem mal e vivem mal, porque não se importam com o que comem, não fazem exames médicos regularmente, não se exercitam etc. Somos uma unidade: espírito, alma e corpo, e estes três devem ser plenamente conservados até o dia de Jesus Cristo (I Tessalonicenses 5:23).</p>
+                <p>Precisamos cuidar bem do nosso corpo para prevenirmos qualquer tipo de doença. Devemos aprender a nos alimentar, fazer exercícios, descansar, fazer check-up, receber orientações médicas quanto à reposição de vitaminas, alimentação etc. Precisamos cuidar da saúde.</p>
+                <p>Cremos na cura divina, mas Deus deixou a Ciência para nos auxiliar. Deus não deixa de ser Deus quando tomamos um medicamento para dor de cabeça, por exemplo. Se Deus lhe deu uma ordem específica para não tomar remédio, não torne isso uma norma para outros também. Deus utiliza a Ciência e os médicos para cuidar da nossa saúde.</p>
+                <p>Vivemos dias difíceis que nos levam constantemente ao stress, por isso precisamos nos cuidar. Deus nos quer vivos e saudáveis para fazer a Sua obra. Davi disse: “Que proveito haverá no meu sangue, se eu descer à cova? Porventura te louvará o pó? Anunciará ele a tua verdade?” (Salmos 30:9). Devemos andar em disciplina com o cuidado do nosso corpo, porque gastamos muita energia no trabalho do Reino.</p>
+
+                <h4 class="text-xl sm:text-2xl font-semibold gold-text pt-1">3.5 Mente</h4>
+                <p>O diabo tentará nos convencer de que aquilo que recebemos não é de Deus. Ele sempre jogará setas de dúvida em nossa mente, para tentar impedir o nosso crescimento pessoal e o do Reino. Ele tentará criar bloqueios, porque sabe que se a nossa mente for atingida por preconceitos e barreiras, não teremos liberdade para celebrar a Deus de uma forma consciente. A nossa mente precisa estar sendo transformada pela Palavra a fim de prestarmos o nosso culto racional (Romanos 12:1-3).</p>
+                <p>Tiago 4:8 fala que a nossa mente precisa estar ocupada com tudo aquilo que é justo, puro, amável, de boa fama, virtuoso, louvável. O inimigo tentará ocupar a nossa mente com dúvidas e barreiras para que não vibremos e celebremos; tentará fazer com que neguemos a nossa experiência. Precisamos vigiar, pois a mente é uma área de contra-ataque do diabo.</p>
+                <p>Através de todas essas breves informações em relação à importância do Pós-Encontro, entendemos como são de fundamental necessidade que o discípulo, após fazer o Encontro, receba as quatro ministrações do Pós-Encontro. Essa é a estratégia para dar continuidade ao crescimento do novo convertido. Então, não podemos ministrá-lo de qualquer forma; precisamos manter sua qualidade.</p>
+                <p>Muitas pessoas têm feito o Pré-Encontro, o Encontro, mas no Pós-Encontro não concluem. Há discípulos que vão à primeira reunião, depois não vão mais. O diabo investe pesado, porque sabe que no Pós-Encontro aprendemos a fechar as portas.</p>
+                <p>As pessoas, sem as ministrações específicas do Pós-Encontro, ficam com as portas abertas e são atacadas violentamente pelo inimigo. Precisamos conscientizar os discípulos, desde o início, desde antes de irem ao Encontro, sobre a necessidade de participarem do Pós-Encontro.</p>
+                <p>O discípulo que consegue fazer um Pós-Encontro de qualidade tem mais facilidade para resistir ao diabo quando este tentar enganá-lo de que a sua experiência com o Senhor não foi verdadeira.</p>
+                <p>Devemos buscar, a cada dia, andar corretamente na Visão, preservando a qualidade em todos os passos. Jamais devemos querer começar por onde outros estão terminando. Cada um precisa trilhar o seu próprio caminho e fazer a sua história.</p>
+                <p>Se você estiver começando agora, não fique ansioso por resultados imediatos, não se precipite na Visão. Deus manifestará os frutos do seu trabalho. Lembre-se de que tudo no tempo de Deus é formoso e perfeito.</p>
+                <p>A unção de Deus está sobre nós e ela é transferida. Hoje nós temos a unção e sabemos o que fazer com ela. Não podemos fazer um ministério se não cremos na unção de Deus; a unção é o nosso respaldo.</p>
+                <p>Não devemos resistir à unção, devemos entregar-nos a ela. Todos os homens que desenvolveram um trabalho importante na história receberam uma unção especial e específica.</p>
+                <p>No Antigo Testamento, vemos que os homens separados por Deus para algo eram ungidos para o propósito específico: Rei, Sacerdote, Profeta. A unção tem propósito, ela é específica. A Visão não existe sem a unção.</p>
+                <p>A nossa missão na Terra é ganhar vidas para Deus.</p>
+                <p>Quando a Igreja não cumpre a missão, cai no legalismo. A Igreja Celular cria todas as estratégias para ensinar as pessoas a como não ir para o inferno. E essa estratégia começa em casa (I Timóteo 5:8).</p>
+                <p>Na Visão, a família é a célula principal. Não podemos ganhar o mundo todo e perder a nossa principal célula: a família. A Visão devolve o amor sacerdotal: o marido se apaixona pela esposa, a esposa pelo marido; os filhos se apaixonam pelos pais e os pais pelos filhos. Quando isso acontece, há uma remoção de maldição (Malaquias 4:6). Isto porque houve uma conversão dos corações.</p>
+                <p>A unção atinge a célula principal: a família. É fácil levantar uma célula na Igreja, mas em casa, é uma guerra. Muitos líderes não tiveram êxito total em seu ministério, porque passaram a vida cuidando dos outros e esquecendo da sua própria casa. A nossa primeira missão dentro da Visão Celular começa dentro de nossa própria casa. Jamais esqueça esta verdade.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="donation-modal" class="hidden fixed inset-0 z-[80] items-center justify-center px-4">
+        <button id="donation-modal-backdrop" class="absolute inset-0 bg-black/80" aria-label="Fechar modal de doação"></button>
+        <div class="relative w-full max-w-md rounded-2xl border border-[#d4af3750] bg-[#0a0a0a] p-6 sm:p-8 shadow-2xl">
+            <button type="button" class="close-donation-modal absolute top-4 right-4 text-white/70 hover:text-white text-xl" aria-label="Fechar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center">
+                <p class="gold-text text-xs tracking-[0.2em] font-semibold mb-2">DOAÇÃO</p>
+                <h3 class="text-3xl font-semibold mb-2">PIX Mercado Pago</h3>
+                <p class="text-gray-300 text-sm mb-6">Escaneie o QR Code ou copie a chave PIX de telefone.</p>
+                <img id="pix-qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=67992886513" alt="QR Code PIX para doação" class="w-56 h-56 sm:w-64 sm:h-64 mx-auto rounded-lg border border-[#d4af3730] bg-white p-2">
+                <p class="text-gray-400 text-sm mt-6">Chave PIX (telefone)</p>
+                <p id="pix-key-value" class="gold-text text-2xl font-semibold tracking-wide mt-1">67992886513</p>
+                <button id="copy-pix-key" type="button" class="btn-gold mt-5 w-full sm:w-auto">Copiar chave PIX</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const siteNav = document.getElementById('site-nav');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            const donationModal = document.getElementById('donation-modal');
+            const donationOpenButtons = document.querySelectorAll('.open-donation-modal');
+            const donationCloseButtons = document.querySelectorAll('.close-donation-modal');
+            const donationModalBackdrop = document.getElementById('donation-modal-backdrop');
+            const copyPixKeyButton = document.getElementById('copy-pix-key');
+            const pixKeyValue = document.getElementById('pix-key-value');
+            const pixQrImage = document.getElementById('pix-qr-image');
+
+            function updateNavOnScroll() {
+                if (!siteNav) return;
+                if (window.scrollY > 24) {
+                    siteNav.classList.add('scrolled');
+                } else {
+                    siteNav.classList.remove('scrolled');
+                }
+            }
+
+            function closeMobileMenu() {
+                if (!mobileMenu || !mobileMenuToggle || !mobileMenuIcon) return;
+                mobileMenu.classList.add('hidden');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                mobileMenuIcon.classList.remove('fa-xmark');
+                mobileMenuIcon.classList.add('fa-bars');
+            }
+
+            function toggleMobileMenu() {
+                if (!mobileMenu || !mobileMenuToggle || !mobileMenuIcon) return;
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+                mobileMenuIcon.classList.toggle('fa-bars', !isHidden);
+                mobileMenuIcon.classList.toggle('fa-xmark', isHidden);
+            }
+
+            function openDonationModal() {
+                if (!donationModal) return;
+                donationModal.classList.remove('hidden');
+                donationModal.classList.add('flex');
+                document.body.classList.add('overflow-hidden');
+                closeMobileMenu();
+            }
+
+            function closeDonationModal() {
+                if (!donationModal) return;
+                donationModal.classList.add('hidden');
+                donationModal.classList.remove('flex');
+                document.body.classList.remove('overflow-hidden');
+            }
+
+            updateNavOnScroll();
+            window.addEventListener('scroll', updateNavOnScroll, { passive: true });
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+            }
+
+            mobileNavLinks.forEach(function(link) {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            donationOpenButtons.forEach(function(button) {
+                button.addEventListener('click', openDonationModal);
+            });
+
+            donationCloseButtons.forEach(function(button) {
+                button.addEventListener('click', closeDonationModal);
+            });
+
+            if (donationModalBackdrop) {
+                donationModalBackdrop.addEventListener('click', closeDonationModal);
+            }
+
+            if (copyPixKeyButton && pixKeyValue) {
+                copyPixKeyButton.addEventListener('click', async function() {
+                    const pixKey = pixKeyValue.textContent.trim();
+                    try {
+                        await navigator.clipboard.writeText(pixKey);
+                        copyPixKeyButton.textContent = 'Chave copiada';
+                        setTimeout(function() {
+                            copyPixKeyButton.textContent = 'Copiar chave PIX';
+                        }, 1800);
+                    } catch (error) {
+                        copyPixKeyButton.textContent = 'Copie manualmente';
+                    }
+                });
+            }
+
+            if (pixQrImage) {
+                pixQrImage.addEventListener('error', function() {
+                    if (pixQrImage.dataset.fallbackApplied === 'true') return;
+                    pixQrImage.dataset.fallbackApplied = 'true';
+                    pixQrImage.src = 'https://quickchart.io/qr?size=320&text=67992886513';
+                });
+            }
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) closeMobileMenu();
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeMobileMenu();
+                    closeDonationModal();
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!mobileMenu || !mobileMenuToggle) return;
+                const clickedInsideMenu = mobileMenu.contains(event.target);
+                const clickedToggle = mobileMenuToggle.contains(event.target);
+                if (!clickedInsideMenu && !clickedToggle) closeMobileMenu();
+            });
+        })();
+    </script>
+</body>
+</html>

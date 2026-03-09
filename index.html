@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Shaddai Ribas · Igreja com propósito</title>
+    <!-- Tailwind + custom layers -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display, Cinzel, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800;900&family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (gratuito) para ícones modernos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* base e animações suaves */
+        :root {
+            --bg-base: #050505;
+            --bg-secondary: #111111;
+            --gold-1: rgba(201, 162, 39, 0.18);
+            --gold-2: rgba(201, 162, 39, 0.10);
+            --blue-soft: rgba(60, 90, 180, 0.08);
+        }
+        html, body {
+            min-height: 100%;
+        }
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-base);
+        }
+        body {
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, var(--gold-1), transparent 35%),
+                radial-gradient(circle at 80% 30%, var(--blue-soft), transparent 30%),
+                radial-gradient(circle at 50% 80%, var(--gold-2), transparent 35%),
+                linear-gradient(135deg, var(--bg-base), var(--bg-secondary) 45%, #090909 100%);
+            background-color: var(--bg-base);
+            color: #ffffff;
+            overflow-x: hidden;
+            isolation: isolate;
+        }
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            inset: -20%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+            will-change: transform, opacity;
+        }
+        body::before {
+            background:
+                radial-gradient(circle at 30% 30%, rgba(201, 162, 39, 0.16), transparent 30%),
+                radial-gradient(circle at 70% 60%, rgba(201, 162, 39, 0.10), transparent 28%);
+            animation: fundoGlowUm 18s ease-in-out infinite alternate;
+            opacity: .9;
+        }
+        body::after {
+            background:
+                radial-gradient(circle at 70% 20%, rgba(60, 90, 180, 0.10), transparent 26%),
+                radial-gradient(circle at 40% 75%, rgba(201, 162, 39, 0.08), transparent 24%);
+            animation: fundoGlowDois 24s ease-in-out infinite alternate;
+            opacity: .75;
+        }
+        main, header, section, footer {
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes fundoGlowUm {
+            0% {
+                transform: translate3d(-2%, -1%, 0) scale(1);
+                opacity: .75;
+            }
+            50% {
+                transform: translate3d(2%, 1%, 0) scale(1.08);
+                opacity: .95;
+            }
+            100% {
+                transform: translate3d(0%, 3%, 0) scale(1.03);
+                opacity: .8;
+            }
+        }
+        @keyframes fundoGlowDois {
+            0% {
+                transform: translate3d(1%, -2%, 0) scale(1.02);
+                opacity: .55;
+            }
+            50% {
+                transform: translate3d(-2%, 2%, 0) scale(1.1);
+                opacity: .8;
+            }
+            100% {
+                transform: translate3d(3%, 0%, 0) scale(1.04);
+                opacity: .6;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            body::before,
+            body::after {
+                animation: none;
+            }
+        }
+        section[id] {
+            scroll-margin-top: 100px;
+        }
+        h1, h2, h3, .serif-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        .cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(8, 14, 28, 0.42);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+        }
+        .site-nav.scrolled {
+            background: rgba(8, 14, 28, 0.8);
+            border-bottom-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 18px 30px -20px rgba(0, 0, 0, 0.9);
+        }
+        .brand-logo {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            color: #d4af37;
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+        .brand-logo-main {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            font-size: 1.35rem;
+        }
+        .brand-logo-main .el-line {
+            display: block;
+            font-size: 0.95rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.1rem;
+        }
+        .brand-logo-divider {
+            width: 100%;
+            border-top: 1px solid rgba(212, 175, 55, 0.6);
+            margin: 0.22rem 0 0.3rem;
+        }
+        .brand-logo-sub {
+            font-family: 'Great Vibes', cursive;
+            text-transform: none;
+            color: #f8f8f8;
+            font-size: 1.05rem;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .brand-logo-footer .brand-logo-main {
+            font-size: 1.8rem;
+        }
+        .brand-logo-footer .brand-logo-main .el-line {
+            font-size: 1.1rem;
+        }
+        .brand-logo-footer .brand-logo-sub {
+            font-size: 1.25rem;
+        }
+        @media (max-width: 640px) {
+            .brand-logo-main {
+                font-size: 1.05rem;
+            }
+            .brand-logo-main .el-line {
+                font-size: 0.75rem;
+            }
+            .brand-logo-sub {
+                font-size: 0.9rem;
+            }
+        }
+        .btn-nav-donate {
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            border-radius: 999px;
+            padding: 0.5rem 1.1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            transition: all 0.25s ease;
+        }
+        .btn-nav-donate:hover {
+            background: #d4af37;
+            color: #000;
+        }
+        /* parallax lite + overlay */
+        .hero-parallax {
+            background-image: linear-gradient(rgba(8,14,28,0.32), rgba(8,14,28,0.4)), url('https://images.unsplash.com/photo-1548625149-d9c2f7c7f7a4?q=80&w=2070&auto=format&fit=crop'); /* cidade noturna cinematográfica */
+            background-attachment: fixed;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .hero-video-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.58) saturate(0.95);
+        }
+        /* animações de entrada (scroll reveal) */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* cards e hover dourado elegante */
+        .gold-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s;
+        }
+        .gold-card:hover {
+            border-color: #d4af37;
+            box-shadow: 0 20px 30px -15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-8px);
+        }
+        .gold-border-bottom {
+            border-bottom: 2px solid #d4af37;
+            width: 80px;
+            margin: 1rem auto;
+        }
+        .gold-text {
+            color: #d4af37;
+        }
+        .btn-gold {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .btn-gold:hover {
+            background: #d4af37;
+            color: black;
+        }
+        .btn-outline-light {
+            border: 2px solid white;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-outline-light:hover {
+            background: white;
+            color: black;
+        }
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.6s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+        /* fundos com textura sutil */
+        .section-divider {
+            background: linear-gradient(180deg, rgba(8, 14, 28, 0.22) 0%, rgba(8, 14, 28, 0.12) 100%);
+        }
+        .bg-black {
+            background-color: rgba(8, 14, 28, 0.14) !important;
+        }
+        .grid-circles img {
+            border: 3px solid #d4af37;
+            transition: 0.3s;
+        }
+        .grid-circles img:hover {
+            border-color: white;
+            transform: scale(1.02);
+        }
+        .doze-icon {
+            width: 8rem;
+            height: 8rem;
+            border: 3px solid #d4af37;
+            border-radius: 9999px;
+            margin: 0 auto;
+            display: grid;
+            place-items: center;
+            font-size: 3.2rem;
+            color: #d4af37;
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 12px 20px -16px rgba(212, 175, 55, 0.6);
+            transition: 0.3s;
+        }
+        .doze-icon:hover {
+            border-color: white;
+            color: white;
+            transform: scale(1.02);
+        }
+        @media (min-width: 768px) {
+            .doze-icon {
+                width: 10rem;
+                height: 10rem;
+                font-size: 3.8rem;
+            }
+        }
+        .instagram-card {
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            background: rgba(255, 255, 255, 0.02);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .instagram-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.55);
+            box-shadow: 0 18px 30px -20px rgba(212, 175, 55, 0.45);
+        }
+        .instagram-caption {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        /* mapa responsivo */
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            filter: grayscale(0.4) invert(0.9) brightness(0.8);
+            transition: filter 0.4s;
+            border-radius: 12px;
+        }
+        .map-container iframe:hover {
+            filter: grayscale(0) invert(0) brightness(1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- NAVIGATION (simples e elegante) -->
+<nav id="site-nav" class="site-nav fixed top-0 left-0 w-full z-50 py-4 px-4 sm:px-6 lg:px-10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+        <a href="#home" class="brand-logo" aria-label="El Shaddai Comunidade Cristã">
+            <span class="brand-logo-main">
+                <span class="el-line">EL</span>
+                <span>SHADDAI</span>
+            </span>
+            <span class="brand-logo-divider"></span>
+            <span class="brand-logo-sub">Comunidade Cristã</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-4 xl:gap-6 text-xs xl:text-sm font-semibold uppercase tracking-wider">
+            <a href="#home" class="hover:text-[#d4af37] transition">Início</a>
+            <a href="#sobre" class="hover:text-[#d4af37] transition">Sobre</a>
+            <a href="#horarios" class="hover:text-[#d4af37] transition">Horários</a>
+            <a href="visao-celular.html" class="hover:text-[#d4af37] transition">Visão Celular</a>
+            <a href="#lideranca" class="hover:text-[#d4af37] transition">Liderança</a>
+            <a href="#eventos" class="hover:text-[#d4af37] transition">Eventos</a>
+            <a href="#instagram" class="hover:text-[#d4af37] transition">Instagram</a>
+            <a href="#local" class="hover:text-[#d4af37] transition">Local</a>
+            <button type="button" class="open-donation-modal btn-nav-donate">Doação</button>
+        </div>
+        <button id="mobile-menu-toggle" class="lg:hidden text-white text-2xl p-2" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i id="mobile-menu-icon" class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden max-w-7xl mx-auto mt-3">
+        <div class="rounded-xl border border-[#d4af3740] bg-[#0b1320]/90 px-4 py-5 flex flex-col gap-4 text-sm font-semibold uppercase tracking-wider">
+            <a href="#home" class="mobile-nav-link hover:text-[#d4af37] transition">Início</a>
+            <a href="#sobre" class="mobile-nav-link hover:text-[#d4af37] transition">Sobre</a>
+            <a href="#horarios" class="mobile-nav-link hover:text-[#d4af37] transition">Horários</a>
+            <a href="visao-celular.html" class="mobile-nav-link hover:text-[#d4af37] transition">Visão Celular</a>
+            <a href="#lideranca" class="mobile-nav-link hover:text-[#d4af37] transition">Liderança</a>
+            <a href="#eventos" class="mobile-nav-link hover:text-[#d4af37] transition">Eventos</a>
+            <a href="#instagram" class="mobile-nav-link hover:text-[#d4af37] transition">Instagram</a>
+            <a href="#local" class="mobile-nav-link hover:text-[#d4af37] transition">Local</a>
+            <button type="button" class="open-donation-modal text-left rounded-lg border border-[#d4af37] px-3 py-2 text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition">Doação</button>
+        </div>
+    </div>
+</nav>
+
+<!-- 1. HERO SECTION com parallax -->
+<section id="home" class="hero-parallax h-screen flex items-center justify-center relative">
+    <div class="hero-video-wrap" aria-hidden="true">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1548625149-d9c2f7c7f7a4?q=80&w=2070&auto=format&fit=crop">
+            <source src="sessions/session1.mp4" type="video/mp4">
+            <source src="session/session1.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="absolute inset-0 z-[1] bg-[#0b1320]/22"></div>
+    <div class="relative z-10 text-center px-4 pt-20 sm:pt-24 max-w-5xl mx-auto fade-up">
+        <h1 class="text-4xl sm:text-6xl lg:text-8xl font-black cinzel gold-text mb-4 tracking-wide">EL SHADDAI RIBAS</h1>
+        <p class="text-lg sm:text-2xl lg:text-3xl text-white/90 font-light mb-8 max-w-2xl mx-auto">"Uma igreja para viver o propósito de Deus"</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-5 mt-10">
+            <a href="#" class="btn-gold text-base sm:text-lg w-full sm:w-auto"><i class="fa-regular fa-calendar-check mr-2"></i>Planeje sua visita</a>
+            <a href="#sobre" class="btn-outline-light text-base sm:text-lg w-full sm:w-auto"><i class="fa-regular fa-heart mr-2"></i>Conheça a igreja</a>
+        </div>
+    </div>
+    <a href="#horarios" aria-label="Descer para horários de culto" class="absolute z-20 bottom-8 left-1/2 transform -translate-x-1/2 text-white text-3xl animate-bounce cursor-pointer">
+        <i class="fa-regular fa-circle-down"></i>
+    </a>
+</section>
+
+<!-- 2. HORÁRIOS DE CULTO (cards) -->
+<section id="horarios" class="py-28 px-6 section-divider">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">COMUNHÃO</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">Horários de culto</h2>
+            <div class="gold-border-bottom"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <!-- card domingo -->
+            <div class="gold-card p-10 text-center rounded-2xl fade-up">
+                <i class="fa-regular fa-sun text-6xl gold-text mb-6"></i>
+                <h3 class="text-3xl font-bold mb-2">DOMINGO</h3>
+                <p class="text-2xl gold-text font-semibold">Culto da Família</p>
+                <p class="text-white/70 text-xl mt-3"><i class="fa-regular fa-clock mr-2"></i>18:30</p>
+            </div>
+            <!-- card quarta -->
+            <div class="gold-card p-10 text-center rounded-2xl fade-up">
+                <i class="fa-regular fa-moon text-6xl gold-text mb-6"></i>
+                <h3 class="text-3xl font-bold mb-2">QUARTA</h3>
+                <p class="text-2xl gold-text font-semibold">Culto de Ensino</p>
+                <p class="text-white/70 text-xl mt-3"><i class="fa-regular fa-clock mr-2"></i>19:30</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. SOBRE A IGREJA (duas colunas) -->
+<section id="sobre" class="py-28 px-6 bg-black">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <div class="fade-up">
+            <span class="gold-text text-sm font-semibold tracking-widest">NOSSA HISTÓRIA</span>
+            <h2 class="text-5xl serif-title mt-2 mb-6">Uma família com propósito</h2>
+            <p class="text-gray-300 text-lg leading-relaxed mb-6">A Igreja El Shaddai Ribas nasceu do desejo de ver vidas transformadas pelo poder do Evangelho. Somos uma comunidade acolhedora, contemporânea e apaixonada por Deus. Aqui você encontra um lugar para chamar de lar, crescer espiritualmente e descobrir seu propósito.</p>
+            <p class="text-gray-300 text-lg leading-relaxed">Nossa visão é impactar a cidade com amor e fé, através de células vibrantes e um ensino bíblico relevante.</p>
+            <div class="mt-8">
+                <a href="#" class="btn-gold inline-block">Saiba mais</a>
+            </div>
+        </div>
+        <div class="img-hover-zoom rounded-2xl overflow-hidden shadow-2xl fade-up">
+            <img src="https://images.unsplash.com/photo-1527960471264-932f39f5842b?q=80&w=2070&auto=format&fit=crop" alt="Comunidade reunida" class="w-full h-auto object-cover">
+        </div>
+    </div>
+</section>
+
+<!-- 4. VISÃO CELULAR (cards com ícones) -->
+<section class="py-28 px-6 section-divider">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">COMUNHÃO AUTÊNTICA</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">Visão celular</h2>
+            <div class="gold-border-bottom"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- card 1 -->
+            <div class="gold-card p-8 rounded-2xl text-center fade-up">
+                <i class="fa-solid fa-hand-holding-heart text-5xl gold-text mb-4"></i>
+                <h3 class="text-2xl font-bold mb-2">Comunhão</h3>
+                <p class="text-gray-400">Vínculos verdadeiros que geram amizades para a vida.</p>
+            </div>
+            <!-- card 2 -->
+            <div class="gold-card p-8 rounded-2xl text-center fade-up">
+                <i class="fa-solid fa-chalkboard-user text-5xl gold-text mb-4"></i>
+                <h3 class="text-2xl font-bold mb-2">Discipulado</h3>
+                <p class="text-gray-400">Acompanhamento intencional para crescer na fé.</p>
+            </div>
+            <!-- card 3 -->
+            <div class="gold-card p-8 rounded-2xl text-center fade-up">
+                <i class="fa-solid fa-seedling text-5xl gold-text mb-4"></i>
+                <h3 class="text-2xl font-bold mb-2">Crescimento</h3>
+                <p class="text-gray-400">Desenvolvimento espiritual através da palavra e oração.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. LIDERANÇA: OS DOZE -->
+<section id="lideranca" class="py-28 px-6 bg-black">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">EQUIPE PASTORAL</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">OS DOZE</h2>
+            <div class="gold-border-bottom"></div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-12 grid-circles">
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-user"></i></div>
+                <p class="mt-3 font-bold">Fernando Olívio e Suelen Machado</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-user"></i></div>
+                <p class="mt-3 font-bold">Paulo Rodrigo e Talita Freitas</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-user"></i></div>
+                <p class="mt-3 font-bold">Idêmio Taveira</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-user"></i></div>
+                <p class="mt-3 font-bold">Fátima Ferreira</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-user"></i></div>
+                <p class="mt-3 font-bold">Thaila Ferreira</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-user"></i></div>
+                <p class="mt-3 font-bold">Nathália Mikaelson</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-user"></i></div>
+                <p class="mt-3 font-bold">Alíro Trindade e Walquiria Trindade</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+            <div class="text-center fade-up">
+                <div class="doze-icon"><i class="fa-solid fa-circle-question"></i></div>
+                <p class="mt-3 font-bold">Pode ser você</p>
+                <p class="gold-text text-sm">Liderança</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. EVENTOS -->
+<section id="eventos" class="py-28 px-6 section-divider">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">AGENDA</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">Próximos eventos</h2>
+            <div class="gold-border-bottom"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- card 1 -->
+            <div class="gold-card rounded-xl overflow-hidden fade-up">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <p class="gold-text font-semibold mb-1"><i class="fa-regular fa-calendar mr-2"></i>15 de junho</p>
+                    <h3 class="text-2xl font-bold mb-2">Conferência Família</h3>
+                    <p class="text-gray-400">Um fim de semana de propósito e conexão.</p>
+                </div>
+            </div>
+            <!-- card 2 -->
+            <div class="gold-card rounded-xl overflow-hidden fade-up">
+                <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070&auto=format&fit=crop" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <p class="gold-text font-semibold mb-1"><i class="fa-regular fa-calendar mr-2"></i>22 a 24 de junho</p>
+                    <h3 class="text-2xl font-bold mb-2">Jejum de Elias</h3>
+                    <p class="text-gray-400">3 dias de oração e consagração.</p>
+                </div>
+            </div>
+            <!-- card 3 -->
+            <div class="gold-card rounded-xl overflow-hidden fade-up">
+                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=2070&auto=format&fit=crop" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <p class="gold-text font-semibold mb-1"><i class="fa-regular fa-calendar mr-2"></i>30 de junho</p>
+                    <h3 class="text-2xl font-bold mb-2">Batismo</h3>
+                    <p class="text-gray-400">Celebre sua fé conosco.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. VÍDEOS / PREGAÇÕES -->
+<section class="py-28 px-6 bg-black">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">MENSAGENS</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">Últimas pregações</h2>
+            <div class="gold-border-bottom"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- vídeo 1 (incorporado) -->
+            <div class="aspect-video fade-up shadow-2xl">
+                <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=1&rel=0&modestbranding=1" title="Pregação 1" allowfullscreen></iframe>
+            </div>
+            <!-- vídeo 2 -->
+            <div class="aspect-video fade-up shadow-2xl">
+                <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/3qVPNQe6r2Y?controls=1&rel=0&modestbranding=1" title="Pregação 2" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="text-center mt-10">
+            <a href="#" class="btn-gold inline-block">Veja mais no YouTube <i class="fa-brands fa-youtube ml-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- 8. INSTAGRAM -->
+<section id="instagram" data-instagram-endpoint="/api/instagram-feed?limit=6" data-instagram-username="elshadairibas" class="py-28 px-6 section-divider">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">INSTAGRAM</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">Últimas publicações</h2>
+            <div class="gold-border-bottom"></div>
+            <p class="text-gray-400 max-w-3xl mx-auto">Quando a igreja publicar no Instagram, as novas postagens aparecem aqui automaticamente.</p>
+        </div>
+        <div id="instagram-feed-status" class="text-center text-gray-400 fade-up">Carregando publicações...</div>
+        <div id="instagram-feed" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8"></div>
+        <div class="text-center mt-10">
+            <a href="https://instagram.com/elshadairibas" target="_blank" rel="noopener noreferrer" class="btn-gold inline-block">
+                Ver perfil no Instagram <i class="fa-brands fa-instagram ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 9. GALERIA (grid com hover) -->
+<section class="py-28 px-6 section-divider">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">MEMÓRIAS</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">Galeria de fotos</h2>
+            <div class="gold-border-bottom"></div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1474418397713-6f21df5f258e?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1517451333167-2d6c11b9b5e6?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1526976668912-1a811878dd37?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1474418397713-6f21df5f258e?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+            <div class="img-hover-zoom rounded-lg overflow-hidden fade-up"><img src="https://images.unsplash.com/photo-1517451333167-2d6c11b9b5e6?w=600&h=400&fit=crop" class="w-full h-64 object-cover"></div>
+        </div>
+    </div>
+</section>
+
+<!-- 10. LOCALIZAÇÃO (mapa) -->
+<section id="local" class="py-28 px-6 bg-black">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12 fade-up">
+            <span class="gold-text text-sm font-semibold tracking-[0.3em]">ENCONTRE A GENTE</span>
+            <h2 class="text-5xl md:text-6xl serif-title mt-2">Onde estamos</h2>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-10 items-center">
+            <div class="lg:col-span-1 fade-up space-y-4">
+                <p class="text-2xl font-bold">EL SHADDAI RIBAS</p>
+                <p class="text-gray-300 text-lg"><i class="fa-solid fa-location-dot gold-text mr-3"></i>Avenida Paulista, 1000 - Bela Vista, São Paulo - SP</p>
+                <p class="text-gray-300"><i class="fa-regular fa-clock gold-text mr-3"></i>Cultos: domingo 18:30 | quarta 19:30</p>
+                <a href="https://maps.google.com/?q=Av+Paulista+1000+Sao+Paulo" target="_blank" class="btn-gold inline-block mt-4"><i class="fa-regular fa-map mr-2"></i>Abrir no Google Maps</a>
+            </div>
+            <div class="lg:col-span-2 map-container fade-up h-80 md:h-96">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1977043346113!2d-46.6517899246675!3d-23.561340661842607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%201000%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-100!5e0!3m2!1spt-BR!2sbr!4v1687102589076!5m2!1spt-BR!2sbr" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL: DOAÇÃO PIX -->
+<div id="donation-modal" class="hidden fixed inset-0 z-[80] items-center justify-center px-4">
+    <button id="donation-modal-backdrop" class="absolute inset-0 bg-black/80" aria-label="Fechar modal de doação"></button>
+    <div class="relative w-full max-w-md rounded-2xl border border-[#d4af3750] bg-[#0a0a0a] p-6 sm:p-8 shadow-2xl">
+        <button type="button" class="close-donation-modal absolute top-4 right-4 text-white/70 hover:text-white text-xl" aria-label="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="text-center">
+            <p class="gold-text text-xs tracking-[0.2em] font-semibold mb-2">DOAÇÃO</p>
+            <h3 class="text-3xl serif-title mb-2">PIX Mercado Pago</h3>
+            <p class="text-gray-300 text-sm mb-6">Escaneie o QR Code ou copie a chave PIX de telefone.</p>
+            <img id="pix-qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=67992886513" alt="QR Code PIX para doação" class="w-56 h-56 sm:w-64 sm:h-64 mx-auto rounded-lg border border-[#d4af3730] bg-white p-2">
+            <p class="text-gray-400 text-sm mt-6">Chave PIX (telefone)</p>
+            <p id="pix-key-value" class="gold-text text-2xl font-semibold tracking-wide mt-1">67992886513</p>
+            <button id="copy-pix-key" type="button" class="btn-gold mt-5 w-full sm:w-auto">Copiar chave PIX</button>
+        </div>
+    </div>
+</div>
+
+<!-- 11. RODAPÉ moderno -->
+<footer class="bg-[#0a0a0a] py-16 px-6 border-t border-[#d4af3720]">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
+        <div>
+            <div class="brand-logo brand-logo-footer mb-4">
+                <span class="brand-logo-main">
+                    <span class="el-line">EL</span>
+                    <span>SHADDAI</span>
+                </span>
+                <span class="brand-logo-divider"></span>
+                <span class="brand-logo-sub">Comunidade Cristã</span>
+            </div>
+            <p class="text-gray-400">Uma igreja para viver o propósito de Deus.</p>
+        </div>
+        <div>
+            <h4 class="text-lg font-bold mb-4">REDES SOCIAIS</h4>
+            <div class="flex space-x-4 text-2xl gold-text">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-spotify"></i></a>
+            </div>
+        </div>
+        <div>
+            <h4 class="text-lg font-bold mb-4">CONTATO</h4>
+            <p class="text-gray-400"><i class="fa-regular fa-envelope mr-2"></i>contato@elshadairibas.com</p>
+            <p class="text-gray-400"><i class="fa-regular fa-phone mr-2"></i>(11) 99999-1234</p>
+        </div>
+        <div>
+            <h4 class="text-lg font-bold mb-4">HORÁRIOS</h4>
+            <p class="text-gray-400">Domingo 18:30<br>Quarta 19:30</p>
+        </div>
+    </div>
+    <div class="max-w-6xl mx-auto text-center text-gray-500 text-sm mt-14 pt-6 border-t border-white/10">
+        © 2025 EL SHADDAI RIBAS. Todos os direitos reservados.
+    </div>
+</footer>
+
+<!-- scroll reveal simples (fade-up) -->
+<script>
+    (function() {
+        const faders = document.querySelectorAll('.fade-up');
+        const appearOptions = { threshold: 0.2, rootMargin: '0px 0px -50px 0px' };
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target); // anima uma vez
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        const siteNav = document.getElementById('site-nav');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const donationModal = document.getElementById('donation-modal');
+        const donationOpenButtons = document.querySelectorAll('.open-donation-modal');
+        const donationCloseButtons = document.querySelectorAll('.close-donation-modal');
+        const donationModalBackdrop = document.getElementById('donation-modal-backdrop');
+        const copyPixKeyButton = document.getElementById('copy-pix-key');
+        const pixKeyValue = document.getElementById('pix-key-value');
+        const pixQrImage = document.getElementById('pix-qr-image');
+        const instagramSection = document.getElementById('instagram');
+        const instagramFeed = document.getElementById('instagram-feed');
+        const instagramFeedStatus = document.getElementById('instagram-feed-status');
+
+        function updateNavOnScroll() {
+            if (!siteNav) return;
+            if (window.scrollY > 24) {
+                siteNav.classList.add('scrolled');
+            } else {
+                siteNav.classList.remove('scrolled');
+            }
+        }
+
+        function closeMobileMenu() {
+            if (!mobileMenu || !mobileMenuToggle || !mobileMenuIcon) return;
+            mobileMenu.classList.add('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            mobileMenuIcon.classList.remove('fa-xmark');
+            mobileMenuIcon.classList.add('fa-bars');
+        }
+
+        function toggleMobileMenu() {
+            if (!mobileMenu || !mobileMenuToggle || !mobileMenuIcon) return;
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+            mobileMenuIcon.classList.toggle('fa-bars', !isHidden);
+            mobileMenuIcon.classList.toggle('fa-xmark', isHidden);
+        }
+
+        function openDonationModal() {
+            if (!donationModal) return;
+            donationModal.classList.remove('hidden');
+            donationModal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+            closeMobileMenu();
+        }
+
+        function closeDonationModal() {
+            if (!donationModal) return;
+            donationModal.classList.add('hidden');
+            donationModal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function escapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function formatDate(isoDate) {
+            if (!isoDate) return '';
+            const date = new Date(isoDate);
+            if (Number.isNaN(date.getTime())) return '';
+            return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+
+        function normalizeInstagramPosts(payload) {
+            const rows = Array.isArray(payload && payload.posts) ? payload.posts : (Array.isArray(payload && payload.data) ? payload.data : []);
+
+            return rows.map(function(item) {
+                return {
+                    image: item.media_url || item.thumbnail_url || '',
+                    permalink: item.permalink || '',
+                    caption: item.caption || 'Publicação no Instagram',
+                    mediaType: item.media_type || 'IMAGE',
+                    timestamp: item.timestamp || ''
+                };
+            }).filter(function(item) {
+                return item.image && item.permalink;
+            });
+        }
+
+        function renderInstagramPosts(posts) {
+            instagramFeed.innerHTML = posts.map(function(post) {
+                const safeCaption = escapeHtml(post.caption);
+                const safeImage = escapeHtml(post.image);
+                const safePermalink = escapeHtml(post.permalink);
+                const safeDate = formatDate(post.timestamp);
+                const mediaLabel = post.mediaType === 'VIDEO' ? 'Vídeo' : (post.mediaType === 'CAROUSEL_ALBUM' ? 'Carrossel' : 'Foto');
+
+                return (
+                    '<a href="' + safePermalink + '" target="_blank" rel="noopener noreferrer" class="instagram-card rounded-xl p-3 block">' +
+                        '<div class="aspect-square overflow-hidden rounded-lg bg-black/50">' +
+                            '<img src="' + safeImage + '" alt="Publicação do Instagram" class="w-full h-full object-cover" loading="lazy">' +
+                        '</div>' +
+                        '<div class="pt-3 space-y-1">' +
+                            '<p class="text-xs gold-text uppercase tracking-wider">' + mediaLabel + (safeDate ? ' · ' + safeDate : '') + '</p>' +
+                            '<p class="instagram-caption text-sm text-gray-300">' + safeCaption + '</p>' +
+                        '</div>' +
+                    '</a>'
+                );
+            }).join('');
+        }
+
+        async function loadInstagramFeed() {
+            if (!instagramSection || !instagramFeed || !instagramFeedStatus) return;
+
+            const endpoint = instagramSection.dataset.instagramEndpoint || '';
+            const username = instagramSection.dataset.instagramUsername || 'instagram';
+
+            if (!endpoint) {
+                instagramFeedStatus.innerHTML = 'Configuração do feed ausente. Acesse <a href="https://instagram.com/' + escapeHtml(username) + '" target="_blank" rel="noopener noreferrer" class="gold-text underline">instagram.com/' + escapeHtml(username) + '</a>.';
+                return;
+            }
+
+            try {
+                const response = await fetch(endpoint, { headers: { 'Accept': 'application/json' } });
+                if (!response.ok) throw new Error('status_' + response.status);
+
+                const payload = await response.json();
+                const posts = normalizeInstagramPosts(payload).slice(0, 6);
+
+                if (!posts.length) throw new Error('empty');
+
+                renderInstagramPosts(posts);
+                instagramFeedStatus.classList.add('hidden');
+            } catch (error) {
+                instagramFeed.innerHTML = '';
+                instagramFeedStatus.classList.remove('hidden');
+                instagramFeedStatus.innerHTML = 'Ainda não foi possível carregar o feed automático. Veja as novidades no <a href="https://instagram.com/' + escapeHtml(username) + '" target="_blank" rel="noopener noreferrer" class="gold-text underline">Instagram da igreja</a>.';
+            }
+        }
+
+        updateNavOnScroll();
+        window.addEventListener('scroll', updateNavOnScroll, { passive: true });
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        }
+
+        mobileNavLinks.forEach(function(link) {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        donationOpenButtons.forEach(function(button) {
+            button.addEventListener('click', openDonationModal);
+        });
+
+        donationCloseButtons.forEach(function(button) {
+            button.addEventListener('click', closeDonationModal);
+        });
+
+        if (donationModalBackdrop) {
+            donationModalBackdrop.addEventListener('click', closeDonationModal);
+        }
+
+        if (copyPixKeyButton && pixKeyValue) {
+            copyPixKeyButton.addEventListener('click', async function() {
+                const pixKey = pixKeyValue.textContent.trim();
+                try {
+                    await navigator.clipboard.writeText(pixKey);
+                    copyPixKeyButton.textContent = 'Chave copiada';
+                    setTimeout(function() {
+                        copyPixKeyButton.textContent = 'Copiar chave PIX';
+                    }, 1800);
+                } catch (error) {
+                    copyPixKeyButton.textContent = 'Copie manualmente';
+                }
+            });
+        }
+
+        if (pixQrImage) {
+            pixQrImage.addEventListener('error', function() {
+                if (pixQrImage.dataset.fallbackApplied === 'true') return;
+                pixQrImage.dataset.fallbackApplied = 'true';
+                pixQrImage.src = 'https://quickchart.io/qr?size=320&text=67992886513';
+            });
+        }
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 1024) closeMobileMenu();
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMobileMenu();
+                closeDonationModal();
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu || !mobileMenuToggle) return;
+            const clickedInsideMenu = mobileMenu.contains(event.target);
+            const clickedToggle = mobileMenuToggle.contains(event.target);
+            if (!clickedInsideMenu && !clickedToggle) closeMobileMenu();
+        });
+
+        loadInstagramFeed();
+    })();
+</script>
+<!-- parallax fix (background-attachment fixed no mobile é suavizado) -->
+<style>
+    @media (max-width: 1024px) {
+        .hero-parallax { background-attachment: scroll; }
+    }
+</style>
+</body>
+</html>
